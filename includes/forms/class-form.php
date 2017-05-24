@@ -37,6 +37,8 @@ class MC4WP_Form {
             }
         }
 
+	    $form_id = apply_filters( 'mc4wp_form_id', $form_id );
+
         if( isset( self::$instances[ $form_id ] ) ) {
             return self::$instances[ $form_id ];
         }

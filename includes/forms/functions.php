@@ -13,6 +13,11 @@ function mc4wp_get_form( $form_id = 0 ) {
 	return MC4WP_Form::get_instance( $form_id );
 }
 
+add_filter( 'mc4wp_form_id', 'wpml_mc4wp_form_id_filter' );
+function wpml_mc4wp_form_id_filter( $form_id ){
+	return apply_filters( 'wpml_object_id', $form_id, 'mc4wp-form', false );
+}
+
 /**
  * Get an array of Form instances
  *
@@ -27,6 +32,7 @@ function mc4wp_get_forms( array $args = array() ) {
 	$default_args = array(
 		'post_status' => 'publish',
 		'numberposts' => -1,
+		'suppress_filters' => false,
 	);
 	$args = array_merge( $default_args, $args );
 	$args['post_type'] = 'mc4wp-form';
