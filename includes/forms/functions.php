@@ -18,6 +18,16 @@ function wpml_mc4wp_form_id_filter( $form_id ){
 	return apply_filters( 'wpml_object_id', $form_id, 'mc4wp-form', false );
 }
 
+add_filter( 'mc4wp_integration_checkbox_label', 'wpml_mc4wp_integration_checkbox_label_filter', 100, 2 );
+function wpml_mc4wp_integration_checkbox_label_filter( $label, $integration ) {
+	$label = apply_filters( 'wpml_translate_single_string', $label,
+		'admin_texts_mc4wp_integrations',
+		"[mc4wp_integrations][{$integration->slug}]label"
+	);
+
+	return $label;
+}
+
 /**
  * Get an array of Form instances
  *
